@@ -1,6 +1,7 @@
 package com.microsoft.demoproves.shotterController;
 
-import java.util.List;	import java.util.Optional;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,9 +11,20 @@ import com.microsoft.demoproves.HelloController;
 import com.microsoft.demoproves.entities.customer;
 import com.microsoft.demoproves.services.customerService;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController //Mapping all the urls
+@RequestMapping("/api/example")
 public class customerControllerLmpl implements HelloController {
+		
+		@GetMapping("/hello-world")
+		public ResponseEntity<String> get() {
+			return ResponseEntity.ok("Hello World!");
+		}
+	
     @Autowired
     customerService customerService;
 
@@ -57,14 +69,14 @@ public class customerControllerLmpl implements HelloController {
     public String test() {
         return "Test done";
     }
-
+    
     @RequestMapping(value = "/error", method = RequestMethod.GET, produces = "application/json")
     @Override
     public String error() {
         return "Error running the application";
     }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
+    
+    @RequestMapping("/")
     @Override
     public String index() {
         return "Welcome to Spring";
